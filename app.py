@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from controller import CUser,CTopic, CPost
+from controller import CUser,CTopic, CPost, CCategory
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
@@ -46,6 +46,11 @@ def suppressionPost():
 @app.route("/miseAjourPost", methods=['PUT'])
 def miseAjourPost():
     return jsonify(reponse= CPost.miseAjourPost(request))
+
+#Category
+@app.route("/creationCategory", methods=['POST'])
+def creationCategory():
+    return jsonify(reponse = CCategory.creationCategory(request))
 
 if __name__ == "__main__":
     app.run(port="3000")

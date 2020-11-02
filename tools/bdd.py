@@ -111,15 +111,24 @@ def miseAjourTopic(idTopic, title):
     connexion = connexionBdd()
     cursor = connexion.cursor()
 
-    sql = "UPDATE Topic SET title = '"+title+"' WHERE id = "+idTopic+""
-
-    cursor.execute(sql)
+    sql = "UPDATE Topic SET title = '" + title + "' WHERE id = " + idTopic + ""
     connexion.commit()
 
-    cursor.close()
-    connexion.close()
+    if verificationTopic(title):
 
-    return True
+        cursor.execute(sql)
+
+        cursor.close()
+        connexion.close()
+
+        return True
+    else:
+        cursor.close()
+        connexion.close()
+        return False
+
+
+
 
 def listeTitreTopic():
 
@@ -198,6 +207,21 @@ def miseAjourPost(idPost, content):
     cursor = connexion.cursor()
 
     sql = "UPDATE post SET content = '"+content+"' WHERE id = "+idPost+""
+
+    cursor.execute(sql)
+    connexion.commit()
+
+    cursor.close()
+    connexion.close()
+
+    return True
+
+#Categorie
+def creationCategorie(label):
+    connexion = connexionBdd()
+    cursor = connexion.cursor()
+
+    sql = "INSERT INTO category(label) VALUES('"+label+"')"
 
     cursor.execute(sql)
     connexion.commit()
