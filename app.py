@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from controller import CUser,CTopic, CPost, CCategory
+
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
@@ -9,7 +10,7 @@ def accueil():
 #Utilisateur
 @app.route("/inscription", methods=['POST'])
 def inscriptionUtilisateur():
-    return jsonify(reponse =CUser.ajouterUtilisateur(request))
+    return jsonify(reponse=CUser.ajouterUtilisateur(request))
 
 
 #Topic
