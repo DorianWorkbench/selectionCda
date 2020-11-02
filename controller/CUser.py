@@ -1,4 +1,4 @@
-from model import User
+from model.User import User
 
 def ajouterUtilisateur(request):
     try:
@@ -6,7 +6,7 @@ def ajouterUtilisateur(request):
         password = request.form.get('password')
         birthDate = request.form.get('birthDate')
 
-        User.User.ajouterUtilisateur(email, password, birthDate)
+        User.ajouterUtilisateur(email, password, birthDate)
 
         return True
 
