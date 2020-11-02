@@ -135,4 +135,74 @@ def listeTitreTopic():
     for result in resultats:
         listeTitre.append(result[0])
 
+    cursor.close()
+    connexion.close()
+
     return listeTitre
+
+#Post
+def creationPost(content, idTopic, idUser):
+
+    connexion = connexionBdd()
+    cursor = connexion.cursor()
+
+    sql = "INSERT INTO Post(postDate, content, idTopic, idUser) VALUES(NOW(), %s, %s, %s)"
+
+    post = (content, idTopic, idUser)
+
+    cursor.execute(sql, post)
+    connexion.commit()
+
+    cursor.close()
+    connexion.close()
+
+    return True
+
+def listePost(idTopic):
+
+    connexion = connexionBdd()
+    cursor = connexion.cursor()
+    listePost = []
+    sql = "SELECT * FROM post WHERE idTopic = "+idTopic+""
+
+    cursor.execute(sql)
+
+    resultats = cursor.fetchall()
+
+    for result in resultats:
+        listePost.append(result)
+
+    cursor.close()
+    connexion.close()
+
+    return listePost
+
+def suppressionPost(idPost):
+
+    connexion = connexionBdd()
+    cursor = connexion.cursor()
+
+    sql = "DELETE FROM Post WHERE id = "+idPost+""
+
+    cursor.execute(sql)
+    connexion.commit()
+
+    cursor.close()
+    connexion.close()
+
+    return True
+
+def miseAjourPost(idPost, content):
+
+    connexion = connexionBdd()
+    cursor = connexion.cursor()
+
+    sql = "UPDATE post SET content = '"+content+"' WHERE id = "+idPost+""
+
+    cursor.execute(sql)
+    connexion.commit()
+
+    cursor.close()
+    connexion.close()
+
+    return True
